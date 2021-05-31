@@ -1,5 +1,6 @@
 var mainStyle = "font-size: small; text-transform: uppercase; font-family: sans-serif; margin: 5px; left: 0; padding: 5px 10px; box-sizing: border-box; width: auto; background-color: #000; color: #fff; position: fixed; top: 0; z-index: 99999; box-shadow: #ddd 3px 3px 0px;";
-document.querySelector('head').innerHTML += '<style>.vis-helper-span a {font-size: small; text-transform: none; color: #fff; text-decoration: none;}</style>';
+var mainStyleBtn = "font-weight: bold; font-size: small; text-transform: uppercase; font-family: sans-serif; margin: 5px; right: 0; padding: 5px 10px; box-sizing: border: none; border-box; width: auto; background-color: #000; color: #fff; position: fixed; top: 0; z-index: 99999; box-shadow: #ddd 3px 3px 0px;";
+document.querySelector('head').innerHTML += '<style>.vis-helper-span a {font-size: small; text-transform: none; color: #fff; text-decoration: none;} .vis-helper-span:visit {text-decoration: none; color: #fff;}</style>';
 var orig = document.body.style.cssText;
 
 function filter(text) {
@@ -39,16 +40,27 @@ function reset(){
 	document.documentElement.style.cssText = "";
 	document.querySelector("#akbar-filter").style.cssText = "";
 	document.removeEventListener("mousemove", rp);
+	document.body.style.cssText += filter('none');
 	var hs = document.getElementsByTagName('style');
 	for (var i=0, max = hs.length; i < max; i++) {
 		hs[i].parentNode.removeChild(hs[i]);
 	}
 }
 
+function openHelp(){
+	window.open('https://www.absv.de/sehbehinderungs-simulator', '_blank')
+}
 
-var buttons = "<button onclick='lowvis();'>Low Vision</button>";
-buttons+= "<button onclick='colorblind();'>Color Blind</button>";
-buttons+= "<button onclick='rp();'>Retinopathia pigmentosa</button>";
+document.addEventListener("keydown", function (e) {
+    if (e.code === "Escape") {
+        reset();
+    }
+});
 
 
-document.body.innerHTML += "<div id='akbar' role='presentation' style='"+mainStyle+"'><strong>👓 Simulate visual impairments:&nbsp;</strong>"+buttons+"&nbsp;<i class='vis-helper-span'><a href='#'>More information</a></i></div><div role='presentation' id='akbar-filter'></div>";
+var buttons = "<button style='font-weight: bold;' onclick='lowvis();'>Low Vision</button>";
+buttons+= "<button style='font-weight: bold;' onclick='colorblind();'>Color Blind</button>";
+buttons+= "<button style='font-weight: bold;' onclick='rp();'>Retinopathia pigmentosa</button>";
+buttons+= "<button onclick='openHelp();'><i>Help</i></button>";
+
+document.body.innerHTML += "<div id='akbar' role='presentation' style='"+mainStyle+"'><strong>👓 Simulate visual impairment:&nbsp;</strong>"+buttons+"</div><div role='presentation' id='akbar-filter'></div><div class='vis-reset' role='presentation'><button style='"+mainStyleBtn+"' onclick='reset();'>❌ Reset (ESC)</button></div>";
