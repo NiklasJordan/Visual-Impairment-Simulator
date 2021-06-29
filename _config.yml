@@ -1,5 +1,5 @@
-title: Akbar
-description: A bookmarklet that simulates various types user experiences.  It is an education tool that will hopefully education people about web accessibility.
+title: Visual Impairment Simulator
+description: A bookmarklet that simulates various types of users with visual disabilities. 
 google_analytics: 
 show_downloads: true
 theme: jekyll-theme-minimal
