@@ -16,6 +16,11 @@ function lowvis() {
 	document.body.style.cssText += filter('blur(3px)');
 }
 
+function blind() {
+	reset();
+	document.querySelector("#akbar-filter").style.cssText = "left:0; top:0;position:fixed; width:100%; height:100%; z-index: 45000; background-color:black";
+}
+
 function colorblind(){
 	reset();
 	document.documentElement.style.cssText += filter('grayscale(100%)');
@@ -48,7 +53,7 @@ function reset(){
 }
 
 function openHelp(){
-	window.open('https://www.absv.de/sehbehinderungs-simulator', '_blank')
+	window.open('http://www.niklasjordan.com/Visual-Impairment-Simulator/', '_blank')
 }
 
 document.addEventListener("keydown", function (e) {
@@ -58,9 +63,10 @@ document.addEventListener("keydown", function (e) {
 });
 
 
-var buttons = "<button style='font-weight: bold;' onclick='lowvis();'>Low Vision</button>";
-buttons+= "<button style='font-weight: bold;' onclick='colorblind();'>Color Blind</button>";
-buttons+= "<button style='font-weight: bold;' onclick='rp();'>Retinopathia pigmentosa</button>";
+var buttons = "<button style='font-weight: bold;' onclick='lowvis();'>Low Vision</button> ";
+buttons+= "<button style='font-weight: bold;' onclick='colorblind();'>Color Blind</button> ";
+buttons+= "<button style='font-weight: bold;' onclick='rp();'>Retinopathia pigmentosa</button> ";
+buttons+= "<button style='font-weight: bold;' onclick='blind();'>Full blindness</button> ";
 buttons+= "<button onclick='openHelp();'><i>Help</i></button>";
 
 document.body.innerHTML += "<div id='akbar' role='presentation' style='"+mainStyle+"'><strong>👓 Simulate visual impairment:&nbsp;</strong>"+buttons+"</div><div role='presentation' id='akbar-filter'></div><div class='vis-reset' role='presentation'><button style='"+mainStyleBtn+"' onclick='reset();'>❌ Reset (ESC)</button></div>";
